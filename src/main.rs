@@ -98,8 +98,10 @@ fn main() -> std::io::Result<()> {
                 continue;
             }
 
-            // Add chapter path to relative links.
-            content.push_str(&relative_path(&ch.content, &ch.path.parent().unwrap()));
+            if let Some(path) = &ch.path {
+                // Add chapter path to relative links.
+                content.push_str(&relative_path(&ch.content, path.parent().unwrap()));
+            }
         }
     }
 
